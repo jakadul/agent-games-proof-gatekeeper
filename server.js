@@ -13,6 +13,10 @@
 
 const http = require('node:http');
 const crypto = require('node:crypto');
+
+// Load .env before any module reads process.env. Never commit .env.
+require('dotenv').config({ path: require('node:path').resolve(__dirname, '.env') });
+
 const { loadConfig } = require('./lib/config');
 const { verifyInbound, signBody } = require('./lib/hmac');
 const { decideGatekeeper } = require('./lib/gatekeeper');
